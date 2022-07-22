@@ -1,5 +1,5 @@
 import random
-from typing import Optional
+from typing import List, Optional, Tuple
 
 import pytorch_lightning as pl
 import torch
@@ -53,6 +53,8 @@ class PRIConModel(pl.LightningModule):
             resume_checkpoint: Path of checkpoint to resume training from for cyclic training
             imagenet_init: Initialize encoder weights with ImageNet supervised
         """
+        assert alpha_point > 0 or alpha_region > 0 or alpha_image > 0
+
         super().__init__()
         self.save_hyperparameters()
         self.lr = lr
@@ -99,10 +101,11 @@ class PRIConModel(pl.LightningModule):
         # Change to channel last memory format
         # https://pytorch.org/tutorials/intermediate/memory_format_tutorial.html
         if self.channel_last:
+            print("Using channel last memory format")
             self = self.to(memory_format=torch.channels_last)
 
     @staticmethod
-    def get_valid_classes(mask1: torch.Tensor, mask2: torch.Tensor) -> list[list[int]]:
+    def get_valid_classes(mask1: torch.Tensor, mask2: torch.Tensor) -> List[List[int]]:
         bs = mask1.shape[1]
         classes = [[] for _ in range(bs)]
         for n in range(bs):
@@ -118,8 +121,8 @@ class PRIConModel(pl.LightningModule):
         mask2: torch.Tensor,
         z1_dense: torch.Tensor,
         z2_dense: torch.Tensor,
-        classes: list[list[int]],
-    ) -> tuple[torch.Tensor, torch.Tensor, list[int]]:
+        classes: List[List[int]],
+    ) -> Tuple[torch.Tensor, torch.Tensor, List[int]]:
         """
         Mask pooling
         """
@@ -149,8 +152,8 @@ class PRIConModel(pl.LightningModule):
         mask1: torch.Tensor,
         mask2: torch.Tensor,
         n_points: int,
-        classes: list[list[int]],
-    ) -> tuple[torch.Tensor, torch.Tensor, list[int]]:
+        classes: List[List[int]],
+    ) -> Tuple[torch.Tensor, torch.Tensor, List[int]]:
         """
         Sample n_points index pairs
         """
@@ -175,7 +178,9 @@ class PRIConModel(pl.LightningModule):
 
         return self.encoder(x)
 
-    def training_step(self, batch, _):
+    def training_step(
+        self, batch: Tuple[List[torch.Tensor], List[torch.Tensor]], _
+    ) -> torch.Tensor:
         imgs, [mask1, mask2] = batch
 
         # --- Extract image features --- #
@@ -275,9 +280,9 @@ class PRIConModel(pl.LightningModule):
             prog_bar=True,
         )
 
-        return loss
+        return loss  # type:ignore
 
-    def configure_optimizers(self):
+    def configure_optimizers(self) -> dict:
         params = [
             {"name": "backbone", "params": self.encoder.parameters()},
             {"name": "projector", "params": self.projector.parameters()},
