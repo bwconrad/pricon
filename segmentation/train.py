@@ -40,20 +40,19 @@ parser.add_argument(
 
 args = parser.parse_args()
 
-# checkpoint_callback = ModelCheckpoint(
-#     save_top_k=1,
-#     monitor="val_iou",
-#     mode="max",
-#     filename="best-{epoch:02d}-{val_iou:.3f}",
-# )
+checkpoint_callback = ModelCheckpoint(
+    save_top_k=1,
+    monitor="val_iou",
+    mode="max",
+    filename="best-{epoch:02d}-{val_iou:.3f}",
+)
 
 # Setup trainer
 logger = init_logger(args)
 dm = dm_class(**args["data"])
 model = model_class(**args["model"])
 trainer = pl.Trainer.from_argparse_args(
-    Namespace(**args),
-    logger=logger,  # callbacks=[checkpoint_callback]
+    Namespace(**args), logger=logger, callbacks=[checkpoint_callback]
 )
 
 # Train
@@ -62,7 +61,7 @@ trainer.fit(model, dm)
 
 # Test
 if args["test"] != "false":
-    # Import the correct evaluation script
+    # Import correct evaluation script
     if args["test"] == "pannuke":
         from eval.eval_pannuke import calculate_pq
     elif args["test"] == "pannuke_breast":

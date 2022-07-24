@@ -31,7 +31,7 @@ tissue_types = [
 
 def calculate_pq(true_path, pred_path, save_path, types_path):
     if not os.path.exists(save_path):
-        os.mkdir(save_path)
+        os.makedirs(save_path)
 
     # load the data
     true = np.load(true_path)
