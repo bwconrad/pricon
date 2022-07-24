@@ -1,5 +1,8 @@
 output/
 data/
+segmentation/eval/targets/
+segmentation/eval/targets_lizard/
+segmentation/eval/types/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
