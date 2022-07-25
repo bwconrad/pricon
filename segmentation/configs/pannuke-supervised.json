@@ -1,0 +1,31 @@
+name: pannuke-supervised
+gpus: 1 
+precision: 16
+max_epochs: 100
+check_val_every_n_epoch: 10
+data:
+  train_fold:
+  - data/pannuke/fold1
+  - data/pannuke/fold2
+  test_fold: data/pannuke/fold3
+  image_dir: images
+  mask_dir: sem_masks
+  train_size: 0
+  test_size: 0
+  batch_size: 16
+  workers: 4
+model:
+  arch: unet
+  encoder: resnet18
+  lr: 0.001
+  betas:
+  - 0.9
+  - 0.999
+  weight_decay: 0.0
+  in_channels: 3
+  n_classes: 6
+  encoder_weights: supervised
+  freeze_encoder: false
+test: pannuke
+test_types_path: eval/types/types-fold3.npy
+test_targets_path: eval/targets/targets-fold3.py

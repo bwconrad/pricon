@@ -50,7 +50,7 @@ class SegmentationModel(pl.LightningModule):
             weight_decay: Weight decay
             in_channels: Number of channels in input images
             n_classes: Number of classes
-            encoder_weights: Path to pretrained encoder weights
+            encoder_weights: Path to pretrained encoder weights (or pass "supervised" to use ImageNet pretrained weights)
             freeze_encoder: Whether to freeze the encoder weights
             unfreeze_after: After what epoch to unfreeze encoder weights
         """
@@ -88,6 +88,7 @@ class SegmentationModel(pl.LightningModule):
 
         # Freeze encoder
         if self.freeze_encoder:
+            print("Freezing encoder's weights")
             freeze(self.net)
 
         # Metrics
