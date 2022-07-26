@@ -1,3 +1,7 @@
+"""
+Copied from: https://github.com/TissueImageAnalytics/PanNuke-metrics/blob/master/utils.py
+"""
+
 import numpy as np
 from scipy.optimize import linear_sum_assignment
 

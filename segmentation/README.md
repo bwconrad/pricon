@@ -41,3 +41,8 @@ python train.py  --gpus 1 --precision 16  --name pannuke --model.n_classes 6 --m
 python scripts/generate_masks.py -w path/to/segmentation/checkpoint -i path/to/image/directory
 -o path/to/output/masks/directory --n_classes <number-of-classes>
 ```
+
+
+### Acknowledgements
+
+Evaluation code is taken from the official [Pannuke evaluation repo](https://github.com/TissueImageAnalytics/PanNuke-metrics).

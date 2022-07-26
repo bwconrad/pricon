@@ -1,3 +1,7 @@
+"""
+Modified from: https://github.com/TissueImageAnalytics/PanNuke-metrics/blob/master/run.py
+"""
+
 import argparse
 import os
 
