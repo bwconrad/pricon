@@ -34,7 +34,7 @@ python train.py --gpus 1 --precision 16 --max_epoch 100 --data.image_dir path/to
 python scripts/extract_encoder_weights.py --checkpoint path/to/pricon/checkpoint/  
 --output path/to/output/weights/
 ```
-- The [`segmentation/`](segmentation/) contains training code for fine-tuning segmentation models using the extracted pretrained encoder weights.
+- The [`segmentation/`](segmentation/) directory contains training code for fine-tuning segmentation models using the extracted pretrained encoder weights.
 
 
 #### _Cyclic Training_

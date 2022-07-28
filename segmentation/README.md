@@ -17,13 +17,13 @@ Code for training semantic segmentation models on the Pannuke and Lizard dataset
 #### _Lizard_
 1. Download the patch-level Lizard dataset from [here](https://conic-challenge.grand-challenge.org/Data/) (registration required) and label files from [here](https://warwick.ac.uk/fac/cross_fac/tia/data/lizard/lizard_labels.zip).
 2. Extract all archives into one directory (e.g. `lizard/`).
-3. To convert the `.npy` files to images, run `python scripts/process_lizard.py -i path/to/lizard`
-4. To generate target files, run `python scripts/create_targets_lizard.py -i path/to/processed/lizard`
+3. To convert the `.npy` files to images run `python scripts/process_lizard.py -i path/to/lizard`
+4. To generate target files run `python scripts/create_targets_lizard.py -i path/to/processed/lizard`
     - These `.npy` files are used for evaluation (i.e. `--test_target_path targets-fold1.npy`).
 
 ### Usage
 #### _Training_
-- For example, to train from scratch on Pannuke run: 
+- To train from scratch on Pannuke run: 
 ```
 python train.py  --gpus 1 --precision 16  --name pannuke --model.n_classes 6 --max_epoch 100 
 --data.train_fold "['data/pannuke/fold1/', 'data/pannuke/fold2']" 
