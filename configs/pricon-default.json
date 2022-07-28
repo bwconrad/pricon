@@ -1,0 +1,46 @@
+name: pricon
+project: default
+gpus: 1
+precision: 16
+max_epochs: 100
+data:
+  image_dir: data/tcga-patches
+  mask_dir: data/tcga-masks
+  n_classes: 6
+  batch_size: 256
+  workers: 4
+  crop_size: 224
+  min_scale: 0.2
+  max_scale: 1.0
+  brightness: 0.8
+  contrast: 0.8
+  saturation: 0.8
+  hue: 0.2
+  color_jitter_prob: 0.8
+  gray_scale_prob: 0.2
+  flip_prob: 0.5
+  rotation_prob: 0.5
+  gaussian_prob: 0.0
+  mean:
+  - 0.5
+  - 0.5
+  - 0.5
+  std:
+  - 0.5
+  - 0.5
+  - 0.5
+model:
+  lr: 0.2
+  weight_decay: 0.0001
+  momentum: 0.9
+  lars: true
+  encoder: resnet18
+  channel_last: false
+  output_dim: 128
+  hidden_dim: 2048
+  temperature: 0.1
+  n_points: 32
+  alpha_point: 0.7
+  alpha_region: 0.75
+  alpha_image: 0.15
+  imagenet_init: false

@@ -1,5 +1,6 @@
 output/
 data/
+weights/
 segmentation/eval/targets/
 segmentation/eval/targets_lizard/
 segmentation/eval/types/
