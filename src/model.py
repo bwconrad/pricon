@@ -48,8 +48,8 @@ class PRIConModel(pl.LightningModule):
             temperature: Temperature parameter for contrastive loss
             n_points: Point loss number of sampled features
             alpha_point: Point loss weight
-            alpha_region: region loss weight
-            alpha_image: image loss weight
+            alpha_region: Region loss weight
+            alpha_image: Image loss weight
             resume_checkpoint: Path of checkpoint to resume training from for cyclic training
             imagenet_init: Initialize encoder weights with ImageNet supervised
         """

@@ -41,7 +41,7 @@ class ImageMaskDataModule(pl.LightningDataModule):
         """Basic data module
 
         Args:
-            data_dir: Path to image directory
+            image_dir: Path to image directory
             mask_dir: Path to mask directory
             n_classes: Number of segmentation mask classes
             batch_size: Number of batch samples
@@ -50,14 +50,14 @@ class ImageMaskDataModule(pl.LightningDataModule):
             min_scale: Minimum crop scale
             max_scale: Maximum crop scale
             brightness: Brightness intensity
-            contast: Contast intensity
+            contrast: Contast intensity
             saturation: Saturation intensity
             hue: Hue intensity
             color_jitter_prob: Probability of applying color jitter
             gray_scale_prob: Probability of converting to grayscale
             flip_prob: Probability of applying horizontal flip
             rotation_prob: Probability of applying rotation
-            gaussian_prob: Probability of applying Gausian blurring
+            gaussian_prob: Probability of applying Gaussian blurring
             mean: Image normalization means
             std: Image normalization standard deviations
         """
