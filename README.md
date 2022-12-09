@@ -1,5 +1,5 @@
 # Point Region Image-level Contrast
-Official repository for "Pseudo-label Guided Join Point Region Image-level Contrastive Learning for Task-specific Pretraining".
+Official repository for ["Pseudo-label Guided Join Point Region Image-level Contrastive Learning for Task-specific Pretraining"](assets/thesis.pdf).
 
 ![PRICon Model](assets/pricon-model.png)
 
